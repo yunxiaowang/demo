@@ -5,10 +5,12 @@
 ////////////////////////////////////////////////////////
 
 #include "Identifier.h"
+
 #include <set>
 #include <map>
 #include <string>
 #include <stdio.h>
+
 using namespace std;
 
 set<Identifier *> IdentifierSet;
@@ -59,13 +61,6 @@ Identifier * Identifier::get(const char * name)
     map<string,Identifier *>::iterator it = StringIdentifierMap.find(sname);
     if(it != StringIdentifierMap.end())
 	{
-#ifdef DEBUG
-//        printf("[Identifier] Identifier already exist, %s\n",name);
-#endif
-//        map<string,Identifier*>::iterator itt;
-//        for(itt = StringIdentifierMap.begin();itt != StringIdentifierMap.end();itt++)
-//            cout<<itt->first<<endl;
-
         return it->second;
     }
     else
@@ -76,10 +71,6 @@ Identifier * Identifier::get(const char * name)
 #endif
 		StringIdentifierMap.insert(map<string,Identifier*>::value_type(sname,newiden));
 		IdentifierSet.insert(newiden);
-
-//        map<string,Identifier*>::iterator itt;
-//        for(itt = StringIdentifierMap.begin();itt != StringIdentifierMap.end();itt++)
-//            cout<<itt->first<<endl;
 
 		return newiden;
 	}

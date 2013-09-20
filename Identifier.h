@@ -15,34 +15,38 @@ public:
         static Identifier * get(int);
         static Identifier * get(const char *);
 
+        Identifier(int number):
+            m_isString(false)
+        {
+            m_value.m_number = number;
+        }
+
+        Identifier(const char * name):
+            m_isString(true)
+        {
+            m_value.m_string =  faststrdup(name);
+        }
+
+        ~Identifier();
+
         bool isValid(Identifier *);
-        bool isString()const
+
+        bool isString() const
         {
             return m_isString;
         }
+
         int getNumber() const
         {
             return m_isString ? 0: m_value.m_number;
         }
+
         const char * getString() const
         {
             return m_isString ? m_value.m_string : 0;
         }
 
 private:
-        Identifier(int number):
-            m_isString(false)
-		{
-			m_value.m_number = number;
-		}
-		
-        Identifier(const char * name):
-            m_isString(true)
-		{
-			m_value.m_string =  faststrdup(name);
-		}
-
-		~Identifier();
 
         union
         {
@@ -51,7 +55,6 @@ private:
         } m_value;
 		
         bool m_isString;
-
 };
 
 
